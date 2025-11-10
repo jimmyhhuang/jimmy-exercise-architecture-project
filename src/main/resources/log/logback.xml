@@ -6,7 +6,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                [%-5level][%d{YYYY-MM-dd'T'HH:mm:ss.SSS+0800}][%X{traceId}][%X{application}][%t][%F:%line]:%msg
+                [%-5level][%d{YYYY-MM-dd'T'HH:mm:ss.SSS+0800}][%X{traceId}][%X{application:-jimmy-architecture}][%t][%F:%line]:%msg
                 %n
             </pattern>
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
