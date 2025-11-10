@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 控制台日志 -->
+    <property resource="application.properties"/>
+    <!--    <property resource="di-service-${spring.profiles.active}.properties"/>-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                [%-5level][%d{YYYY-MM-dd'T'HH:mm:ss.SSS+0800}][%X{traceId}][%X{application}][%t][%F:%line]:%msg
+                %n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+<!--        &lt;!&ndash; 添加敏感信息过滤器 &ndash;&gt;-->
+<!--        <filter "/>-->
+    </appender>
+
+    <appender name="ROOT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${spring.application.name}.log</file>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>
+                [%-5level][%d{YYYY-MM-dd'T'HH:mm:ss.SSS+0800}][%X{traceId}][%X{application}][%t][%F:%line]:%msg
+                %n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${log.path}/${spring.application.name}.log.%d{yyyy-MM-dd}-%i.gz</fileNamePattern>
+            <!-- 清理历史文件-->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!--按文件大小滚动-->
+            <maxFileSize>600MB</maxFileSize>
+            <!-- 总大小上限5GB -->
+            <totalSizeCap>5GB</totalSizeCap>
+            <!-- 最大保存时间：7天-->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ROOT"/>
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
