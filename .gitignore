@@ -25,3 +25,4 @@ tree.txt
 .DS_Store
 Thumbs.db
 software/
+node_modules/
